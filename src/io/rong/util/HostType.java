@@ -1,7 +1,7 @@
 package io.rong.util;
 
 public enum HostType {
-	API("http://api.cn.ronghub.com"), SMS("http://api.sms.ronghub.com");
+	API("http://api.cn.ronghub.com") , SMS("http://api.sms.ronghub.com");
 	private String type;
 
 	private HostType(String type) {
@@ -15,6 +15,11 @@ public enum HostType {
 			}
 		}
 		throw new RuntimeException(state + " is not a valid Host Type!");
+	}
+	public void overwriteUrl(String customUrl){
+		if(customUrl !=null && customUrl.trim().length()>0){
+			this.type = customUrl;
+		}
 	}
 
 	public String getStrType() {

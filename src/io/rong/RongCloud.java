@@ -10,6 +10,7 @@ package io.rong;
 import java.util.concurrent.ConcurrentHashMap;
 
 import io.rong.methods.*;
+import io.rong.util.HostType;
 
 public class RongCloud {
 
@@ -37,6 +38,21 @@ public class RongCloud {
 	public static RongCloud getInstance(String appKey, String appSecret) {
 		if (null == rongCloud.get(appKey)) {
 			rongCloud.putIfAbsent(appKey, new RongCloud(appKey, appSecret));
+		}
+		return rongCloud.get(appKey);
+	}
+	public static RongCloud getInstance(String appKey, String appSecret,String apiUrl,String smsUrl) {
+		if (null == rongCloud.get(appKey)) {
+			rongCloud.putIfAbsent(appKey, new RongCloud(appKey, appSecret));
+		}
+
+		if(apiUrl !=null && apiUrl.trim().length()>0) {
+			HostType.API.overwriteUrl(apiUrl);
+		}
+
+
+		if(smsUrl !=null && smsUrl.trim().length()>0) {
+			HostType.SMS.overwriteUrl(smsUrl);
 		}
 		return rongCloud.get(appKey);
 	}
